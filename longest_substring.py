@@ -4,33 +4,34 @@ substring without repeating characters.
 """
 
 class Solution:
-    repets = list()
 
     def get_substring(self, flag, letters):
         substring = list()
-        while True:
-            letter = letters.pop(0)
-            if flag is not letter and letter not in self.repets:
-                substring.append(letter)
-                self.repets.append(letter)
+        repets = list()
+        index = 1
+        while index < len(letters):
+            letter = letters[index]
+            if flag is not letter:
+                if letter not in repets:
+                    substring.append(letter)
+                    repets.append(letter)
             else:
-                if flag not in self.repets:
-                    substring.append(flag)
-                    self.repets.append(letter)
+                substring.append(flag)
                 break
+            index += 1
         return len(substring)
 
-    def lengthOfLongestSubstring(self, string, longest_string=[]):
+    def lengthOfLongestSubstring(self, string):
         index = 0
-        lens = 0
-        for letter in string:
-            letters = [letter for letter in string]
-            flag = letters.pop(index)
-            if flag in letters:
-                len_substring = self.get_substring(flag, letters)
-                lens += len_substring
+        len_substring = 0
+        while index < len(string):
+            flag = string[index]
+            if flag in string[index+1:]:
+                substring = self.get_substring(flag, string[index:])
+                if substring > len_substring:
+                    len_substring = substring 
             index += 1
-        return lens 
+        return len_substring
 
 s = Solution()
 print(s.lengthOfLongestSubstring('abrkaabcdefghijjxxx'), 10)
