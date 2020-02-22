@@ -80,3 +80,4 @@ matrix = [
 print(word_search(matrix, 'FOAM'))
 print(word_search(matrix, 'FACI'))
 print(word_search(matrix, 'MASS'))
+print(word_search(matrix, 'MASA'))
